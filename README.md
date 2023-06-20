@@ -27,7 +27,7 @@ AIによるコードの自動生成は大きく分けて2つの活用方法が�
 
 ## アーキテクチャ
 
-![アーキテクチャ](architecture.png)
+![アーキテクチャ](https://github.com/Kourin1996/smart_tailor/blob/1b2c338e30b9eea5a35d0b1b1c3a4f33852c9014/architecture.png)
 
 大きく分けて、Webフロントエンドとサーバサイドに分かれます。　　
 
