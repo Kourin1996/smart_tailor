@@ -3,8 +3,7 @@ import { Box, Stack, Typography, Button } from '@mui/material';
 
 const BorderColor = 'rgba(144, 202, 249, 0.5)';
 
-export const Header = () => {
-    const appName = "app name"
+export const Header = ({appName}: {appName: string}) => {
     const handleBuild = useCallback(() => {
 
     }, []);

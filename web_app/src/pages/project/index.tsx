@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Box, Stack, Typography, Grid, Button } from '@mui/material';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Stack, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Footer } from './Footer';
 import { EditorPane } from './Editor';
@@ -9,7 +9,21 @@ import { Header } from './Header';
 
 const BorderColor = 'rgba(144, 202, 249, 0.5)';
 
-const EditorPage = () => {
+const EditorPage = ({data}: {data: any}) => {
+    console.log('data', data);
+
+    const {appName, solidityCode, reactCode, solidityBuildResult, reactBuildResult} = useMemo(() => {
+        const abi = JSON.parse(data.solidity_abi);
+
+        return {
+            appName: abi.contractName,
+            solidityCode: data.solidity_code,
+            reactCode: data.react_code,
+            solidityBuildResult: data.solidity_build_result,
+            reactBuildResult: data.react_build_result,
+        }
+    }, [data])
+
     return (
         <Stack
             display="flex"
@@ -20,16 +34,16 @@ const EditorPage = () => {
             width="calc(100vw - 36px)"
             sx={{margin: '0px 8px'}}
         >
-            <Header />
+            <Header appName={appName} />
             <Grid container flexWrap="nowrap" sx={{ padding: '24px 0px', height: "calc(100vh - 250px)", overflow: 'hidden' }}>
-                <Grid xs={6} sx={{ maxHeight: "100%", overflow: 'auto', '&::-webkit-scrollbar': { display: 'none' } }}>
-                    <EditorPane />
+                <Grid xs={6} sx={{ maxHeight: "calc(100vh - 274px)", '&::-webkit-scrollbar': { display: 'none' } }}>
+                    <EditorPane solidityCode={solidityCode} reactCode={reactCode} />
                 </Grid>
-                <Grid xs={6} sx={{ marginLeft: '16px', marginRight: '16px', maxHeight: "100%", overflowY: 'auto', border: `1px solid ${BorderColor}`, borderRadius: '8px', '&::-webkit-scrollbar': { display: 'none' } }}>
+                <Grid xs={6} sx={{ marginLeft: '16px', marginRight: '16px', maxHeight: "calc(100vh - 274px)", border: `1px solid ${BorderColor}`, borderRadius: '8px' }}>
                     <PreviewPane />
                 </Grid>
             </Grid>
-            <Footer />
+            <Footer solidityBuildResult={solidityBuildResult} reactBuildResult={reactBuildResult} />
         </Stack>
     )
 }
@@ -65,5 +79,5 @@ export const ProjectPage = () => {
         }
     }, [record, count])
 
-    return record?.status === 'COMPLETE' ? <EditorPage /> : <LoadingPanel status={record.status} />
+    return record?.status === 'COMPLETE' ? <EditorPage data={record} /> : <LoadingPanel status={record.status} />
 }

@@ -30,56 +30,7 @@ const ReactTabsStyle = {
     }
 }
 
-export const Footer = () => {
-    const solidityCodeResult = useMemo(() => {
-        return `added 24 packages, and audited 1551 packages in 8s
-260 packages are looking for funding
-    run \`npm fund\` for details
-
-8 vulnerabilities (1 moderate, 7 high)
-
-To address all issues (including breaking changes), run:
-    npm audit fix --force
-
-Run \`npm audit\` for details.
-
-added 24 packages, and audited 1551 packages in 8s
-260 packages are looking for funding
-    run \`npm fund\` for details
-
-8 vulnerabilities (1 moderate, 7 high)
-
-To address all issues (including breaking changes), run:
-    npm audit fix --force
-
-Run \`npm audit\` for details
-
-added 24 packages, and audited 1551 packages in 8s
-260 packages are looking for funding
-    run \`npm fund\` for details
-
-8 vulnerabilities (1 moderate, 7 high)
-
-To address all issues (including breaking changes), run:
-    npm audit fix --force
-
-Run \`npm audit\` for details
-`;
-    }, []);
-
-    const reactCodeResult = useMemo(() => {
-        return `added 24 packages, and audited 1551 packages in 8s
-260 packages are looking for funding
-    run \`npm fund\` for details
-
-8 vulnerabilities (1 moderate, 7 high)
-
-To address all issues (including breaking changes), run:
-    npm audit fix --force
-
-Run \`npm audit\` for details.`;
-    }, []);
-
+export const Footer = ({solidityBuildResult, reactBuildResult}: {solidityBuildResult: string; reactBuildResult: string}) => {
     return (
         <Box height="200px" sx={{flex: '0 0 200px'}}>
             <Box height="190px" sx={{
@@ -96,7 +47,7 @@ Run \`npm audit\` for details.`;
                         <Box height="100%" overflow="auto" sx={{ '&::-webkit-scrollbar': { display: 'none' }, '& > div': {background: 'rgba(64, 64, 64, 0.2)', paddingBottom: '16px'} }}>
                             <Editor
                                 readOnly
-                                value={solidityCodeResult}
+                                value={solidityBuildResult}
                                 onValueChange={() => { }}
                                 highlight={code => highlight(code, languages.bash, 'bash')}
                                 padding={20}
@@ -111,7 +62,7 @@ Run \`npm audit\` for details.`;
                         <Box height="100%" overflow="auto" sx={{ '&::-webkit-scrollbar': { display: 'none' }, '& > div': {background: 'rgba(64, 64, 64, 0.2)', paddingBottom: '16px'} }}>
                             <Editor
                                 readOnly
-                                value={reactCodeResult}
+                                value={reactBuildResult}
                                 onValueChange={() => { }}
                                 highlight={code => highlight(code, languages.bash, 'bash')}
                                 padding={20}

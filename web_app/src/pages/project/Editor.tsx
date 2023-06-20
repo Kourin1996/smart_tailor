@@ -36,66 +36,16 @@ const ReactTabsStyle = {
     }
 }
 
-export const EditorPane = () => {
-    const [code, setCode] = useState(`
-    import React from 'react';
-    import ReactDOM from 'react-dom/client';
-    import App from './App';
-    import reportWebVitals from './reportWebVitals';
-    import './index.css';
-    
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-    
-    // If you want to start measuring performance in your app, pass a function
-    // to log results (for example: reportWebVitals(console.log))
-    // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-    reportWebVitals(); 
-    
-    import React from 'react';
-    import ReactDOM from 'react-dom/client';
-    import App from './App';
-    import reportWebVitals from './reportWebVitals';
-    import './index.css';
-    
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-    
-    // If you want to start measuring performance in your app, pass a function
-    // to log results (for example: reportWebVitals(console.log))
-    // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-    reportWebVitals(); 
+export const EditorPane = (props: {solidityCode: string; reactCode: string}) => {
+    const {solidityCode: defaultSolidityCode, reactCode: defaultReactCode} = props;
+    const [solidityCode, setSolidityCode] = useState(defaultSolidityCode);
+    const [reactCode, setReactCode] = useState(defaultReactCode);
 
-    import React from 'react';
-    import ReactDOM from 'react-dom/client';
-    import App from './App';
-    import reportWebVitals from './reportWebVitals';
-    import './index.css';
-    
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-    
-    // If you want to start measuring performance in your app, pass a function
-    // to log results (for example: reportWebVitals(console.log))
-    // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-    reportWebVitals(); 
-`);
+    console.log('solidityCode', solidityCode);
 
     return (
-        <Box width="100vw" sx={{ flex: '0 0 200px' }}>
-            <Box width="100%" sx={{
+        <Box height="100%" sx={{ flex: '0 0 200px' }}>
+            <Box height="100%" sx={{
                 margin: '0px 24px',
                 overflow: 'hidden',
                 ...ReactTabsStyle,
@@ -106,11 +56,12 @@ export const EditorPane = () => {
                         <Tab>React</Tab>
                     </TabList>
                     <TabPanel>
-                        <Box height="850px" overflow="auto" sx={{ '&::-webkit-scrollbar': { display: 'none' }, '& > div': { background: 'rgba(64, 64, 64, 0.2)', paddingBottom: '16px' } }}>
+                        {/* TODO: 高さ調整 */}
+                        <Box height="800px" sx={{ overflow: 'scroll', '&::-webkit-scrollbar': { display: 'none' }, '& > div': { background: 'rgba(64, 64, 64, 0.2)', paddingBottom: '16px' } }}>
                             <Editor
-                                value={code}
-                                onValueChange={code => setCode(code)}
-                                highlight={code => highlight(code, languages.jsx, 'jsx')}
+                                value={solidityCode}
+                                onValueChange={code => setSolidityCode(code)}
+                                highlight={code => highlight(code, languages.sol, 'sol')}
                                 style={{
                                     fontFamily: '"Fira code", "Fira Mono", monospace',
                                     fontSize: 16,
@@ -119,10 +70,11 @@ export const EditorPane = () => {
                         </Box>
                     </TabPanel>
                     <TabPanel>
-                        <Box height="850px" overflow="auto" sx={{ '&::-webkit-scrollbar': { display: 'none' }, '& > div': { background: 'rgba(64, 64, 64, 0.2)', paddingBottom: '16px' } }}>
+                        {/* TODO: 高さ調整 */}
+                        <Box height="800px" sx={{ overflow: 'scroll', '&::-webkit-scrollbar': { display: 'none' }, '& > div': { background: 'rgba(64, 64, 64, 0.2)', paddingBottom: '16px' } }}>
                             <Editor
-                                value={code}
-                                onValueChange={code => setCode(code)}
+                                value={reactCode}
+                                onValueChange={code => setReactCode(code)}
                                 highlight={code => highlight(code, languages.jsx, 'jsx')}
                                 style={{
                                     fontFamily: '"Fira code", "Fira Mono", monospace',
