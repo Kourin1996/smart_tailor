@@ -1,0 +1,6 @@
+node_modules
+.idea
+.venv
+code_generator/projects
+.env
+code_generator/site_generator/src/pages/*

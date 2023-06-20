@@ -1,0 +1,19 @@
+{
+  "name": "hardhat-project",
+  "scripts": {
+    "test": "hardhat test",
+    "build": "hardhat compile",
+    "hardhat": "hardhat",
+    "compile": "hardhat compile",
+    "prettier": "./node_modules/.bin/prettier --write src/**/*.sol"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat": "^2.15.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-solidity": "^1.1.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.2"
+  }
+}

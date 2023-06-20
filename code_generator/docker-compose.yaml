@@ -1,0 +1,17 @@
+version: '3'
+services:
+  python:
+    build: .
+    container_name: 'python3'
+    working_dir: '/usr/local/worker'
+    tty: true
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/local/worker
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./data/redis:/data"
